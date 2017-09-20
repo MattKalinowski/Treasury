@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treasury.view.InfoController">
+   <children>
+      <Label layoutX="75.0" layoutY="50.0" prefHeight="99.0" prefWidth="148.0" text="%info" textAlignment="CENTER" wrapText="true" />
+   </children>
+</AnchorPane>

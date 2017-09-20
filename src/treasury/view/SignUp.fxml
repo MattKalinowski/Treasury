@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treasury.view.SignUpController">
+   <children>
+      <Label layoutX="154.0" layoutY="44.0" text="Treasury">
+         <font>
+            <Font name="Herculanum" size="36.0" />
+         </font>
+      </Label>
+      <Button focusTraversable="false" layoutX="131.0" layoutY="151.0" mnemonicParsing="false" onAction="#handleSignUpWithFacebook" prefHeight="37.0" prefWidth="239.0" text="%withfb" />
+      <Label layoutX="241.0" layoutY="206.0" text="%or" />
+      <Separator layoutX="132.0" layoutY="214.0" prefWidth="100.0" />
+      <Separator layoutX="269.0" layoutY="214.0" prefWidth="100.0" />
+      <Separator layoutX="-2.0" layoutY="118.0" prefWidth="500.0" />
+      <Label layoutX="137.0" layoutY="223.0" text="%withmail">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailField" focusTraversable="false" layoutX="131.0" layoutY="264.0" prefHeight="37.0" prefWidth="239.0" promptText="Email" />
+      <TextField fx:id="confirmEmailField" focusTraversable="false" layoutX="131.0" layoutY="316.0" prefHeight="37.0" prefWidth="239.0" promptText="%conf" />
+      <PasswordField fx:id="passwordField" focusTraversable="false" layoutX="131.0" layoutY="369.0" prefHeight="37.0" prefWidth="239.0" promptText="%password" />
+      <TextField fx:id="usernameField" focusTraversable="false" layoutX="131.0" layoutY="422.0" prefHeight="37.0" prefWidth="239.0" promptText="%name" />
+      <CheckBox fx:id="agreeToTerms" focusTraversable="false" layoutX="131.0" layoutY="477.0" mnemonicParsing="false" text="%agree">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </CheckBox>
+      <Button focusTraversable="false" layoutX="197.0" layoutY="507.0" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="37.0" prefWidth="107.0" text="%signup" />
+      <Label layoutX="128.0" layoutY="550.0" prefHeight="28.0" prefWidth="171.0" text="%alreadyhave">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button focusTraversable="false" layoutX="302.0" layoutY="553.0" mnemonicParsing="false" onAction="#handleLogIn" prefHeight="23.0" prefWidth="78.0" text="%login">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="emailAlert1" layoutX="32.0" layoutY="268.0" text="%emailalert1" textFill="RED" visible="false">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="emailAlert2" layoutX="32.0" layoutY="320.0" text="%emailalert2" textAlignment="CENTER" textFill="RED" visible="false">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="passwordAlert" layoutX="32.0" layoutY="380.0" text="%passhint2" textAlignment="CENTER" textFill="RED" visible="false">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameAlert" layoutX="32.0" layoutY="426.0" text="%usernamealert" textFill="RED" visible="false">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameAlert2" layoutX="17.0" layoutY="435.0" text="%usernamealert2" textFill="RED" visible="false">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="termsAlert" layoutX="156.0" layoutY="462.0" text="%termsalert" textFill="RED" visible="false">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

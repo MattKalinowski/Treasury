@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treasury.view.AppController">
+   <children>
+      <ImageView fx:id="graphics" fitHeight="225.0" fitWidth="314.0" layoutX="96.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@graphics/coins.jpeg" />
+         </image>
+      </ImageView>
+      <Label fx:id="amountOfMoney" layoutX="210.0" layoutY="340.0" prefHeight="67.0" prefWidth="109.0" text="1000" textFill="#7fe162">
+         <font>
+            <Font size="44.0" />
+         </font>
+      </Label>
+      <Button focusTraversable="false" layoutX="139.0" layoutY="476.0" mnemonicParsing="false" onAction="#handleWithdrawal" prefHeight="60.0" prefWidth="100.0" text="%withdrawal" />
+      <Button focusTraversable="false" layoutX="258.0" layoutY="476.0" mnemonicParsing="false" onAction="#handleDeposit" prefHeight="60.0" prefWidth="100.0" text="%deposit" />
+      <Button focusTraversable="false" layoutX="404.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="38.0" prefWidth="82.0" text="%settings" />
+      <Button focusTraversable="false" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleInfo" prefHeight="25.0" prefWidth="32.0" text="i" />
+      <TextField fx:id="textField" focusTraversable="false" layoutX="139.0" layoutY="407.0" prefHeight="51.0" prefWidth="218.0" />
+      <Button focusTraversable="false" layoutX="17.0" layoutY="559.0" mnemonicParsing="false" onAction="#handleBack" text="%back" />
+      <Label fx:id="currencySymbol" alignment="CENTER_RIGHT" layoutX="122.0" layoutY="348.0" prefHeight="51.0" prefWidth="82.0" textAlignment="RIGHT" textFill="#7fe162">
+         <font>
+            <Font size="41.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
