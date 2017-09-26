@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import treasury.data.Database;
+import treasury.data.Security;
 import treasury.model.Model;
 import treasury.view.AppController;
 import treasury.view.ChangeNameController;
@@ -26,10 +28,11 @@ public class Main extends Application {
     private Stage window;
     private BorderPane rootLayout;
     private Model mod = new Model();
+    private Database database = new Database();
     private Locale locale;
     private ResourceBundle bundle;
-    private String name = "Matt";
-    private String password = "";
+    private String name = "sasa";
+    private String password = "b07243350c7ca4e45c0bfd115e61e0ae8397f52835cfdd07e4628628";
     private String email;
     private String currency;
     private String language;
@@ -258,6 +261,9 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    public Stage getWindow() {
+        return window;
+    }
     public Model getModel() {
         return mod;
     }
@@ -321,14 +327,18 @@ public class Main extends Application {
     public void setPass(String password) {
         this.password = password;
     }
+    public String getPasswordHash(String password) {
+        String hash = Security.getHash(password.getBytes(), "SHA-224");
+        return hash;
+    }
     public String getEmail() {
         return email;
     }
     public void setEmail(String email) {
         this.email = email;
     }
-    public Stage getWindow() {
-        return window;
+    public Database getDatabase() {
+        return database;
     }
     
 }

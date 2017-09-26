@@ -63,7 +63,9 @@ public class LogInController implements Initializable {
     private void validate() {
         String typedName = name.getText();
         String typedPass = password.getText();
-        if (typedName.equals(main.getName()) && typedPass.equals(main.getPass())) {
+        String typedPassHash = main.getPasswordHash(typedPass);
+        if (main.getDatabase().verifyLoginData(typedName, typedPassHash)) {
+            loadAppData(typedName);
             main.showApp();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -71,6 +73,11 @@ public class LogInController implements Initializable {
             alert.setHeaderText(main.getBundle().getString("inwalidpassandname"));
             alert.showAndWait(); 
         }
+    }
+
+    private void loadAppData(String name) {
+        int userId = main.getDatabase().getUserId(name);
+        System.out.println(userId);
     }
     
 }

@@ -15,7 +15,7 @@
             <Image url="@graphics/coins.jpeg" />
          </image>
       </ImageView>
-      <Label fx:id="amountOfMoney" layoutX="210.0" layoutY="340.0" prefHeight="67.0" prefWidth="109.0" text="1000" textFill="#7fe162">
+      <Label fx:id="amountOfMoney" layoutX="210.0" layoutY="340.0" prefHeight="67.0" prefWidth="109.0" text="0" textFill="#7fe162">
          <font>
             <Font size="44.0" />
          </font>

@@ -35,21 +35,24 @@ public class ChangePassController {
         changePassStage.close();
     }
     private void passwordChange() {
-        String oldPassword = oldPass.getText();
-        String newPassword = newPass.getText();
+        String oldPassInput = oldPass.getText();
+        String newPassInput = newPass.getText();
+        String oldPassHash = main.getPasswordHash(oldPassInput);
+        String newPassHash = main.getPasswordHash(newPassInput);
         int passwordMinLength = 3;
-        if (oldPassword.equals(main.getPass()) && newPassword.length() >= passwordMinLength) {
-            main.setPass(newPassword);
+        int passLength = newPass.getText().length();
+        if (oldPassHash.equals(main.getPass()) && passLength >= passwordMinLength) {
+            main.setPass(newPassHash);
             main.showSettings();
             changePassStage.close();
-        } else if (!oldPassword.equals(main.getPass())) {
+        } else if (!oldPassHash.equals(main.getPass())) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(changePassStage);
             alert.setHeaderText(main.getBundle().getString("inwalidpass"));
             alert.setContentText(main.getBundle().getString("typecorrect"));
             alert.showAndWait(); 
         }
-        else if (newPassword.length() < passwordMinLength) {
+        else if (passLength < passwordMinLength) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(changePassStage);
             alert.setHeaderText(main.getBundle().getString("inwalidpass"));

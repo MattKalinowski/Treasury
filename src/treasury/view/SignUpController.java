@@ -60,6 +60,9 @@ public class SignUpController {
         main.setName(username);
         main.setPass(password);
         main.setEmail(email);
+        main.getDatabase().insertLoginData(username, password, email);
+        main.getDatabase().insertInitialAppData(false, false, false, 
+                0, 0, main.getLanguageString(), main.getCurrency());
     }
     
     private boolean validateTextFields() {
@@ -91,13 +94,14 @@ public class SignUpController {
     }
     
     private boolean validatePassword() {
-        password = passwordField.getText();
         int passwordMinLength = 3;
-        if (password.length() < passwordMinLength) {
+        int passLength = passwordField.getText().length();
+        if (passLength < passwordMinLength) {
             passwordAlert.setVisible(true);
             return false;
         } else {
             passwordAlert.setVisible(false);
+            password = main.getPasswordHash(passwordField.getText());
             return true;
         }
     }
