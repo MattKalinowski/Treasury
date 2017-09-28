@@ -28,6 +28,6 @@
          </font>
       </Label>
       <Button fx:id="switchLanguage" focusTraversable="false" layoutX="420.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleLanguageSwitch" text="PL/EN" />
-      <CheckBox fx:id="keepLoggedIn" focusTraversable="false" layoutX="168.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleKeepLoggedIn" selected="true" text="%keep" />
+      <CheckBox fx:id="keepLoggedInBox" focusTraversable="false" layoutX="168.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleKeepLoggedIn" text="%keep" />
    </children>
 </AnchorPane>
