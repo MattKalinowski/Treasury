@@ -31,12 +31,14 @@ public class Main extends Application {
     private Database database = new Database();
     private Locale locale;
     private ResourceBundle bundle;
-    private String name = "sasa";
-    private String password = "b07243350c7ca4e45c0bfd115e61e0ae8397f52835cfdd07e4628628";
+    private String name;
+    private String password;
     private String email;
     private String currency;
     private String language;
+    private int money;
     private int goal;
+    private boolean autolog;
     
     @Override
     public void start(Stage primaryStage) {
@@ -44,13 +46,12 @@ public class Main extends Application {
         window = primaryStage;
         window.setTitle("Treasury");
         //sets system language 
-        locale = Locale.getDefault();
+        setLanguage();
         setDefaultCurrency();
         goal = 0;
-        
+        mod.setMain(this);
         initRootLayout();
         showLogIn();
-        
     }
 
     public void initRootLayout() {
@@ -81,6 +82,14 @@ public class Main extends Application {
             
         LogInController controller = loader.getController();
         controller.setMain(this);
+        
+        boolean loginfo = getDatabase().selectLoginfo();
+        String loginfoName = getDatabase().selectLoginfoName();
+        autolog(loginfo, loginfoName);
+            if (autolog) {
+                controller.loadAppData(name);
+                showApp();
+            }
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -276,6 +285,18 @@ public class Main extends Application {
     public ResourceBundle getBundle() {
         return bundle;
     }
+    
+    
+    public void setLanguage() {
+        if (getDatabase().selectLanguage() == null) {
+            locale = Locale.getDefault();
+            getDatabase().insertLanguage(locale.getLanguage());
+        } else {
+            setLocale(new Locale(getDatabase().selectLanguage()));
+        }
+    }
+    
+    
     public String getLanguageString() {
         String lang = locale.getLanguage();
         switch (lang) {
@@ -292,8 +313,12 @@ public class Main extends Application {
     }
     public void setCurrency(String currency) {
         this.currency = currency;
+        int userId = getDatabase().selectUserId(name);
+        getDatabase().updateCurrency(currency, userId);
     }
     public void setDefaultCurrency() {
+        int userId = getDatabase().selectUserId(name);
+        if(getDatabase().selectCurrency(userId) == null) {
         String lang = locale.getLanguage();
         switch (lang) {
             case "en":
@@ -305,6 +330,8 @@ public class Main extends Application {
             default:
                 throw new AssertionError();
         }
+        getDatabase().updateCurrency(currency, userId);
+        } 
     }
     public String getCurrency() {
         return currency;
@@ -314,6 +341,9 @@ public class Main extends Application {
     }
     public void setGoal(int goal) {
         this.goal = goal;
+        int userId = getDatabase().selectUserId(name);
+        getDatabase().updateGoal(goal, userId);
+        
     }
     public String getName() {
         return name;
@@ -339,6 +369,18 @@ public class Main extends Application {
     }
     public Database getDatabase() {
         return database;
+    }
+    public int getMoney() {
+        return money;
+    }
+    public void setMoney(int money) {
+        this.money = money;
+        int userId = getDatabase().selectUserId(name);
+        getDatabase().updateMoney(money, userId);
+    }
+    private void autolog(boolean keeploggedin, String name) {
+        autolog = keeploggedin;
+        this.name = name;
     }
     
 }

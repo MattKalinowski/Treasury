@@ -34,6 +34,8 @@ public class AppController {
 
     public void setMain(Main main) {
         this.main = main;
+        
+        updateLabel();
     }
     public void initialize() {
         textField.setTextFormatter(new TextFormatter<>(integerFilter));
@@ -65,7 +67,7 @@ public class AppController {
         main.showInfo();
     }
     private void updateLabel() {
-        amountOfMoney.setText(String.valueOf(main.getModel().getMoney()));
+        amountOfMoney.setText(String.valueOf(main.getMoney()));
     }
     @FXML
     private void handleBack() {

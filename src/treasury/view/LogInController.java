@@ -20,9 +20,10 @@ public class LogInController implements Initializable {
     @FXML
     private PasswordField password;
     @FXML
-    private CheckBox keepLoggedIn;
+    private CheckBox keepLoggedInBox;
     @FXML
     private Button switchLanguage;
+    private boolean keepLoggedIn;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,16 +49,18 @@ public class LogInController implements Initializable {
     private void handleLanguageSwitch() {
         if (main.getLocale().getLanguage().equals("pl")) {
             main.setLocale(new Locale("en"));
+            main.getDatabase().updateLanguage("en");
             main.showLogIn();
         } else if (main.getLocale().getLanguage().equals("en")) {
             main.setLocale(new Locale("pl"));
+            main.getDatabase().updateLanguage("pl");
             main.showLogIn();
         }
         main.setDefaultCurrency();
     }
     @FXML
     private void handleKeepLoggedIn() {
-        
+        keepLoggedIn = keepLoggedInBox.isSelected();
     }
 
     private void validate() {
@@ -65,6 +68,7 @@ public class LogInController implements Initializable {
         String typedPass = password.getText();
         String typedPassHash = main.getPasswordHash(typedPass);
         if (main.getDatabase().verifyLoginData(typedName, typedPassHash)) {
+            main.getDatabase().insertLoginfo(1, keepLoggedIn, name.getText());
             loadAppData(typedName);
             main.showApp();
         } else {
@@ -75,9 +79,16 @@ public class LogInController implements Initializable {
         }
     }
 
-    private void loadAppData(String name) {
-        int userId = main.getDatabase().getUserId(name);
-        System.out.println(userId);
+    public void loadAppData(String name) {
+        int userId = main.getDatabase().selectUserId(name);
+        main.setName(name);
+        main.setMoney(main.getDatabase().selectMoney(userId));
+        main.setGoal(main.getDatabase().selectGoal(userId));
+        main.setCurrency(main.getDatabase().selectCurrency(userId));
+    }
+    
+    public boolean getLogInfo() {
+        return keepLoggedIn;
     }
     
 }

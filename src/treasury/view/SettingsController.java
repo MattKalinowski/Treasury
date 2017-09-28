@@ -77,6 +77,8 @@ public class SettingsController {
     }
     @FXML
     private void handleLogout() {
+        int id = 1;
+        main.getDatabase().deleteLoginfo(id);
         main.showLogIn();
     }
     @FXML
@@ -86,8 +88,10 @@ public class SettingsController {
     private void handleLanguageSwitch(String lang) {
         if (lang.equals("polski")) {
             main.setLocale(new Locale("pl"));
+            main.getDatabase().updateLanguage("pl");
         } else if (lang.equals("english")) {
             main.setLocale(new Locale("en"));
+            main.getDatabase().updateLanguage("en");
         }
         main.showSettings();
     }
@@ -133,7 +137,5 @@ public class SettingsController {
     public void setGoalLabel() {
         goal.setText(String.valueOf(main.getGoal()));
     }
-    private void test() {
-        System.out.println("Test completed.");
-    }
+    
 }

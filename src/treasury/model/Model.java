@@ -1,19 +1,25 @@
 package treasury.model;
 
+import treasury.Main;
+
 public class Model {
     
-    private int amountOfMoney;
+    private Main main;
     
     public void deposit(int amountAdded) {
+        int amountOfMoney = main.getMoney();
         amountOfMoney += amountAdded;
+        main.setMoney(amountOfMoney);
     }
     
     public void withdrawal(int amountSubtracted) {
+        int amountOfMoney = main.getMoney();
         amountOfMoney -= amountSubtracted;
+        main.setMoney(amountOfMoney);
     }
-    
-    public int getMoney() {
-        return amountOfMoney;
+
+    public void setMain(Main main) {
+        this.main = main;
     }
     
 }

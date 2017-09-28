@@ -61,8 +61,7 @@ public class SignUpController {
         main.setPass(password);
         main.setEmail(email);
         main.getDatabase().insertLoginData(username, password, email);
-        main.getDatabase().insertInitialAppData(false, false, false, 
-                0, 0, main.getLanguageString(), main.getCurrency());
+        main.getDatabase().insertInitialAppData(false, 0, 0, main.getCurrency());
     }
     
     private boolean validateTextFields() {
