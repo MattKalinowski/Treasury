@@ -64,10 +64,6 @@ public class SettingsController {
         main.showApp();
     }
     @FXML
-    private void handleCancel() {
-        main.showApp();
-    }
-    @FXML
     private void handleChangePassword() {
         main.showChangePass();
     }
@@ -117,6 +113,12 @@ public class SettingsController {
             case "PLN":
                 currencyBox.setValue(currencies.get(3));
                 break;
+            case "EUR":
+                currencyBox.setValue(currencies.get(1));
+                break;
+            case "GBP":
+                currencyBox.setValue(currencies.get(2));
+                break;    
             default:
                 throw new AssertionError();
         }
@@ -128,8 +130,14 @@ public class SettingsController {
                 currencySymbol.setText("$");
                 break;
             case "PLN":
-                currencySymbol.setText("ZŁ");
+                currencySymbol.setText("PLN");
                 break;    
+            case "EUR":
+                currencySymbol.setText("€");
+                break;    
+            case "GBP":
+                currencySymbol.setText("£");
+                break;      
             default:
                 throw new AssertionError();
         }

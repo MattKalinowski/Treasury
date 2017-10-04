@@ -3,6 +3,7 @@ package treasury.view;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -22,7 +23,7 @@ public class LogInController implements Initializable {
     @FXML
     private CheckBox keepLoggedInBox;
     @FXML
-    private Button switchLanguage;
+    private Button switchLanguageButton;
     private boolean keepLoggedIn;
     
     @Override
@@ -32,6 +33,7 @@ public class LogInController implements Initializable {
     
     public void setMain(Main main) {
             this.main = main;
+            switchLangButtonPicture(main.getLocale().getLanguage());
     }
     @FXML
     private void handleLogIn() {
@@ -89,6 +91,20 @@ public class LogInController implements Initializable {
     
     public boolean getLogInfo() {
         return keepLoggedIn;
+    }
+    
+    /*
+       Changes button's style by selecting corresponding CSS' Pseudo Class 
+    */
+    private void switchLangButtonPicture(String lang) {
+        if (lang.equals("pl")) {
+            PseudoClass buttonPlPseudoClass = PseudoClass.getPseudoClass("button-pl");
+            switchLanguageButton.pseudoClassStateChanged(buttonPlPseudoClass, true);
+        } else if (lang.equals("en")) {
+            PseudoClass buttonEnPseudoClass = PseudoClass.getPseudoClass("button-en");
+            switchLanguageButton.pseudoClassStateChanged(buttonEnPseudoClass, true);
+        }
+        
     }
     
 }

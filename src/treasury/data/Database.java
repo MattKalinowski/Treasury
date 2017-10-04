@@ -158,6 +158,46 @@ public class Database {
         return id;
     }
     
+    public boolean selectUserName(String n){
+        boolean verify = false;
+        String sql = "SELECT name FROM logindata";
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            while (rs.next()) {
+               String name = rs.getString("name");
+                if (name.equals(n)) {
+                    verify = true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return verify;
+    }
+    
+    public boolean selectUserEmail(String mail){
+        boolean verify = false;
+        String sql = "SELECT email FROM logindata";
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            while (rs.next()) {
+               String email = rs.getString("email");
+                if (email.equals(mail)) {
+                    verify = true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return verify;
+    }
+    
     public int selectMoney(int userId) {
         int money = 0;
         String sql = "SELECT id, money FROM appdata";

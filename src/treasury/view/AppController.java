@@ -34,7 +34,7 @@ public class AppController {
 
     public void setMain(Main main) {
         this.main = main;
-        
+        setImage();
         updateLabel();
     }
     public void initialize() {
@@ -69,10 +69,6 @@ public class AppController {
     private void updateLabel() {
         amountOfMoney.setText(String.valueOf(main.getMoney()));
     }
-    @FXML
-    private void handleBack() {
-        main.showLogIn();
-    }
     public void setCurrencySymbol() {
         String currency = main.getCurrency();
         switch (currency) {
@@ -80,11 +76,21 @@ public class AppController {
                 currencySymbol.setText("$");
                 break;
             case "PLN":
-                currencySymbol.setText("ZŁ");
+                currencySymbol.setText("PLN");
                 break;    
+            case "EUR":
+                currencySymbol.setText("€");
+                break;    
+            case "GBP":
+                currencySymbol.setText("£");
+                break;      
             default:
                 throw new AssertionError();
         }
+    }
+    
+    private void setImage() {
+        String imagePath = 
     }
     
 }

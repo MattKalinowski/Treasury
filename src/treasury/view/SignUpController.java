@@ -75,6 +75,9 @@ public class SignUpController {
         if (!email.equals(confirmEmail) || email.isEmpty()) {
             emailAlert2.setVisible(true);
             return false;
+        } else if (main.getDatabase().selectUserEmail(email)) {
+            emailAlert1.setVisible(true);
+            return false;
         } else {
             emailAlert2.setVisible(false);
             return true;
@@ -85,6 +88,10 @@ public class SignUpController {
         username = usernameField.getText();
         if (username.isEmpty()) {
             nameAlert2.setVisible(true);
+            return false;
+        } 
+        else if (main.getDatabase().selectUserName(username)) {
+            nameAlert.setVisible(true);
             return false;
         } else {
             nameAlert2.setVisible(false);
