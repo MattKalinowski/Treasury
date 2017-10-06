@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import treasury.data.Database;
 import treasury.data.Security;
 import treasury.model.Model;
@@ -19,9 +20,11 @@ import treasury.view.ChangePassController;
 import treasury.view.InfoController;
 import treasury.view.LogInController;
 import treasury.view.SetGoalController;
+import treasury.view.SetInitialGoalController;
 import treasury.view.SettingsController;
 import treasury.view.SignUpController;
 import treasury.view.TermsController;
+import treasury.view.WelcomeToTreasuryController;
 
 public class Main extends Application {
     
@@ -119,7 +122,7 @@ public class Main extends Application {
             loader.setResources(bundle);
             loader.setLocation(Main.class.getResource("view/App.fxml"));
             AnchorPane app = (AnchorPane) loader.load();
-
+            
             rootLayout.setCenter(app);
             
         AppController controller = loader.getController();
@@ -127,6 +130,25 @@ public class Main extends Application {
         controller.setCurrencySymbol();
         
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void showWelcomeToTreasury() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            bundle = ResourceBundle.getBundle("treasury.view.lang", locale);
+            loader.setResources(bundle);
+            loader.setLocation(Main.class.getResource("view/WelcomeToTreasury.fxml"));
+            AnchorPane welcomeToTreasury = (AnchorPane) loader.load();
+            
+            rootLayout.setCenter(welcomeToTreasury);
+            window.setOnCloseRequest(event -> { 
+                getDatabase().deleteLoginfo(getDatabase().selectUserId(name));} );
+            
+            WelcomeToTreasuryController controller = loader.getController();
+            controller.setMain(this);
+        
+            } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -139,10 +161,11 @@ public class Main extends Application {
             AnchorPane settings = (AnchorPane) loader.load();
 
             rootLayout.setCenter(settings);
+            
         SettingsController controller = loader.getController();
         controller.setMain(this);
-        controller.setDefaultCurrency(); // ok
-        controller.setFlag(); // <- i tu
+        controller.setDefaultCurrency(); 
+        controller.setFlag(); 
         controller.setGoalLabel();
         
         } catch (IOException e) {
@@ -205,6 +228,7 @@ public class Main extends Application {
             
             Stage setGoalStage = new Stage();
             setGoalStage.initModality(Modality.WINDOW_MODAL);
+            setGoalStage.initStyle(StageStyle.UNDECORATED);
             setGoalStage.initOwner(window);
             Scene scene = new Scene(setGoal);
             setGoalStage.setScene(scene);
@@ -214,6 +238,31 @@ public class Main extends Application {
             controller.setMain(this);
         
             setGoalStage.showAndWait();
+            
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void showSetInitialGoal() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            bundle = ResourceBundle.getBundle("treasury.view.lang", locale);
+            loader.setResources(bundle);
+            loader.setLocation(Main.class.getResource("view/SetInitialGoal.fxml"));
+            AnchorPane setInitialGoal = (AnchorPane) loader.load();
+            
+            Stage setInitialGoalStage = new Stage();
+            setInitialGoalStage.initModality(Modality.WINDOW_MODAL);
+            setInitialGoalStage.initStyle(StageStyle.UNDECORATED);
+            setInitialGoalStage.initOwner(window);
+            Scene scene = new Scene(setInitialGoal);
+            setInitialGoalStage.setScene(scene);
+            
+            SetInitialGoalController controller = loader.getController();
+            controller.setSetGoalStage(setInitialGoalStage);
+            controller.setMain(this);
+        
+            setInitialGoalStage.showAndWait();
             
             } catch (IOException e) {
             e.printStackTrace();
@@ -229,6 +278,7 @@ public class Main extends Application {
             
             Stage changePassStage = new Stage();
             changePassStage.initModality(Modality.WINDOW_MODAL);
+            changePassStage.initStyle(StageStyle.UNDECORATED);
             changePassStage.initOwner(window);
             Scene scene = new Scene(changePass);
             changePassStage.setScene(scene);
@@ -253,6 +303,7 @@ public class Main extends Application {
             
             Stage changeNameStage = new Stage();
             changeNameStage.initModality(Modality.WINDOW_MODAL);
+            changeNameStage.initStyle(StageStyle.UNDECORATED);
             changeNameStage.initOwner(window);
             Scene scene = new Scene(changeName);
             changeNameStage.setScene(scene);
@@ -382,5 +433,5 @@ public class Main extends Application {
         autolog = keeploggedin;
         this.name = name;
     }
-    
+
 }
