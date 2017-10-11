@@ -17,6 +17,7 @@ import treasury.model.Model;
 import treasury.view.AppController;
 import treasury.view.ChangeNameController;
 import treasury.view.ChangePassController;
+import treasury.view.DeleteAccountController;
 import treasury.view.InfoController;
 import treasury.view.LogInController;
 import treasury.view.SetGoalController;
@@ -30,8 +31,8 @@ public class Main extends Application {
     
     private Stage window;
     private BorderPane rootLayout;
-    private Model mod = new Model();
-    private Database database = new Database();
+    private final Model mod = new Model();
+    private final Database database = new Database();
     private Locale locale;
     private ResourceBundle bundle;
     private String name;
@@ -50,7 +51,6 @@ public class Main extends Application {
         window.setTitle("Treasury");
         //sets system language 
         setLanguage();
-        setDefaultCurrency();
         goal = 0;
         mod.setMain(this);
         initRootLayout();
@@ -124,9 +124,11 @@ public class Main extends Application {
             AnchorPane app = (AnchorPane) loader.load();
             
             rootLayout.setCenter(app);
+            window.setOnCloseRequest(event -> {} ); //overrides the listener from showWelcomeToTreasury()
             
         AppController controller = loader.getController();
         controller.setMain(this);
+        setDefaultCurrency();
         controller.setCurrencySymbol();
         
         } catch (IOException e) {
@@ -142,8 +144,8 @@ public class Main extends Application {
             AnchorPane welcomeToTreasury = (AnchorPane) loader.load();
             
             rootLayout.setCenter(welcomeToTreasury);
-            window.setOnCloseRequest(event -> { 
-                getDatabase().deleteLoginfo(getDatabase().selectUserId(name));} );
+            int UserId = 1;
+            window.setOnCloseRequest(event -> {getDatabase().deleteLoginfo(UserId);} );
             
             WelcomeToTreasuryController controller = loader.getController();
             controller.setMain(this);
@@ -175,6 +177,8 @@ public class Main extends Application {
     public void showTerms() {
         try {
             FXMLLoader loader = new FXMLLoader();
+            bundle = ResourceBundle.getBundle("treasury.view.lang", locale);
+            loader.setResources(bundle);
             loader.setLocation(Main.class.getResource("view/Terms.fxml"));
             AnchorPane terms = (AnchorPane) loader.load();
             
@@ -313,6 +317,32 @@ public class Main extends Application {
             controller.setMain(this);
         
             changeNameStage.showAndWait();
+            
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void showDeleteAccount() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            bundle = ResourceBundle.getBundle("treasury.view.lang", locale);
+            loader.setResources(bundle);
+            loader.setLocation(Main.class.getResource("view/DeleteAccount.fxml"));
+            AnchorPane deleteAccount = (AnchorPane) loader.load();
+            
+            Stage deleteAccountStage = new Stage();
+            deleteAccountStage.initModality(Modality.WINDOW_MODAL);
+            deleteAccountStage.initStyle(StageStyle.UNDECORATED);
+            deleteAccountStage.initOwner(window);
+            Scene scene = new Scene(deleteAccount);
+            deleteAccountStage.setScene(scene);
+            
+            DeleteAccountController controller = loader.getController();
+            controller.DeleteAccountStage(deleteAccountStage);
+            controller.setMain(this);
+        
+            deleteAccountStage.showAndWait();
             
             } catch (IOException e) {
             e.printStackTrace();

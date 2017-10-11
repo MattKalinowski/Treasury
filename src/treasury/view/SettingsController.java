@@ -4,10 +4,13 @@ import java.util.Locale;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import treasury.Main;
 
 public class SettingsController {
@@ -21,6 +24,10 @@ public class SettingsController {
     private Label currencySymbol;
     @FXML
     private ImageView flag;
+    @FXML
+    private Button okButton;
+    @FXML
+    private AnchorPane anchorPane;
     @FXML
     private ChoiceBox<String> languagesBox;
     private final ObservableList<String> languages = FXCollections
@@ -51,12 +58,12 @@ public class SettingsController {
                         handleLanguageSwitch(newValue));
     }
     
-    /*
-    this method allows to set default values for FXML objects when controler is initialized
-    */
-    @FXML
-    private void initialize() {
-        
+    public void initialize() {
+        anchorPane.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+              okButton.fire();
+             }
+        }); 
     }
 
     @FXML
@@ -64,23 +71,33 @@ public class SettingsController {
         main.showApp();
     }
     @FXML
+    
     private void handleChangePassword() {
         main.showChangePass();
     }
     @FXML
+    
     private void handleChangeName() {
         main.showChangeName();
     }
+    
     @FXML
     private void handleLogout() {
         int id = 1;
         main.getDatabase().deleteLoginfo(id);
         main.showLogIn();
     }
+    
+    @FXML
+    private void handleDelete() {
+        main.showDeleteAccount();
+    }
+    
     @FXML
     private void handleChangeGoal() {
         main.showSetGoal();
     }
+    
     private void handleLanguageSwitch(String lang) {
         if (lang.equals("polski")) {
             main.setLocale(new Locale("pl"));
@@ -91,6 +108,7 @@ public class SettingsController {
         }
         main.showSettings();
     }
+    
     public void setFlag() {
         String language = main.getLocale().getLanguage();
         switch (language) {
@@ -104,6 +122,7 @@ public class SettingsController {
                 throw new AssertionError();
         }
     }
+    
     public void setDefaultCurrency() {
         String currency = main.getCurrency();
         switch (currency) {
@@ -123,6 +142,7 @@ public class SettingsController {
                 throw new AssertionError();
         }
     }
+    
     public void setCurrencySymbol() {
         String currency = main.getCurrency();
         switch (currency) {
@@ -142,6 +162,7 @@ public class SettingsController {
                 throw new AssertionError();
         }
     }
+    
     public void setGoalLabel() {
         goal.setText(String.valueOf(main.getGoal()));
     }

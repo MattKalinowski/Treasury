@@ -14,8 +14,10 @@ public class Model {
     
     public void withdrawal(int amountSubtracted) {
         int amountOfMoney = main.getMoney();
+        if(amountOfMoney >= amountSubtracted) {
         amountOfMoney -= amountSubtracted;
         main.setMoney(amountOfMoney);
+        }
     }
 
     public void setMain(Main main) {

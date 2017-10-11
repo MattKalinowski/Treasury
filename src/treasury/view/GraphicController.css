@@ -10,15 +10,13 @@
     -fx-background-image:url('./graphics/Background.png');
     -fx-background-size: 500 600;
 }
-.smalltheme {
-    -fx-background-image:url('./graphics/Background_small.png');
-    -fx-background-size: 500 600;
-}
 .deposittextfield {
     -fx-background-image:url('./graphics/MoneyTextField.png');
     -fx-background-size: contain;
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
+    -fx-max-width: 190;
+    -fx-max-height: 65;
 }
 .depositbutton {
     -fx-background-image:url('./graphics/Deposit.png');
@@ -26,17 +24,26 @@
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
 }
+.depositbutton:pressed {
+    -fx-background-size: 90 88;
+}
 .withdrawalbutton {
     -fx-background-image:url('./graphics/Withdrawal.png');
     -fx-background-size: contain;
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
 }
+.withdrawalbutton:pressed {
+    -fx-background-size: 90 88;
+}
 .settingsbutton {
     -fx-background-image:url('./graphics/Settings.png');
     -fx-background-size: contain;
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
+}
+.settingsbutton:pressed {
+    -fx-background-image:url('./graphics/Settings-clicked.png');
 }
 .logintextfield {
     -fx-background-image:url('./graphics/LoginTextField.png');
@@ -50,6 +57,9 @@
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
 }
+.loginbuttons:pressed {
+    -fx-background-image:url('./graphics/LoginButton-clicked.png');
+}
 .signuptextfields {
     -fx-background-image:url('./graphics/SignupTextField.png');
     -fx-background-size: contain;
@@ -62,11 +72,17 @@
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
 }
+.signupbutton:pressed {
+     -fx-background-image:url('./graphics/SignUpButton-clicked.png');
+}
 .info {
     -fx-background-image:url('./graphics/info.png');
     -fx-background-size: contain;
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
+}
+.info:pressed {
+    -fx-background-image:url('./graphics/info-clicked.png');
 }
 .check-box>.box {
   -fx-background-insets: 0;
@@ -78,7 +94,7 @@
   -fx-background-image: url('./graphics/KeepLoggedIn.png');
   -fx-background-position: center;
   -fx-background-repeat: stretch;
-  -fx-background-size: 16 16;
+  -fx-background-size: 11 11;
   -fx-shape:null;
 }
 
@@ -99,9 +115,8 @@
     -fx-background-color: transparent;
 }
 .separator *.line { 
-    -fx-border-style: solid;
     -fx-border-width: 0 0 1 0;
-    -fx-background-color: #ffab00;
+    -fx-background-color: #bf800c;
 }
 .changebutton {
     -fx-background-image:url('./graphics/ChangeButton.png');
@@ -109,18 +124,40 @@
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
 }
+.changebutton:pressed {
+    -fx-background-image:url('./graphics/ChangeButton-clicked.png');
+}
 .bigbutton {
     -fx-background-image:url('./graphics/BigButton.png');
     -fx-background-size: contain;
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
 }
+.bigbutton:pressed {
+    -fx-background-image:url('./graphics/BigButton-clicked.png');
+}
+.treasure:state-0 {
+    -fx-image:url('./graphics/Treasure0.png');
+}
+.smalltextfields {
+    -fx-background-image:url('./graphics/TextField.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: stretch;
+    -fx-background-color: transparent;
+}
+.lettersbutton:pressed {
+    -fx-text-fill:#ff9000;
+}
 .listbutton {
     -fx-background-image:url('./graphics/ListButton.png');
     -fx-background-size: contain;
     -fx-background-repeat: stretch;
     -fx-background-color: transparent;
+    -fx-mark-color: black ;
 }
-.treasure:state-0 {
-    -fx-image:url('./graphics/Treasure0.png');
+.listbutton .menu-item:focused {
+    -fx-background-color: chocolate ;
+}
+.listbutton .context-menu {
+    -fx-background-color:#edd690 ;
 }

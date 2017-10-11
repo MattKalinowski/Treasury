@@ -23,7 +23,7 @@ public class Database {
         
         String sql2 = "CREATE TABLE IF NOT EXISTS appdata (\n"
                 + "	id integer PRIMARY KEY,\n"
-                + "     withfacebook boolean,\n"
+                + "     newuser boolean,\n"
                 + "     money integer,\n"
                 + "     goal integer,\n"
                 + "     currency text"
@@ -76,14 +76,14 @@ public class Database {
         }
     }
     
-    public void insertInitialAppData(boolean withfacebook, int money, 
+    public void insertInitialAppData(boolean newuser, int money, 
             int goal, String currency) {
-        String sql = "INSERT INTO appdata(withfacebook,"
+        String sql = "INSERT INTO appdata(newuser,"
                 + "money,goal,currency) VALUES(?,?,?,?)";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setBoolean(1, withfacebook);
+            pstmt.setBoolean(1, newuser);
             pstmt.setInt(2, money);
             pstmt.setInt(3, goal);
             pstmt.setString(4, currency);
@@ -428,20 +428,132 @@ public class Database {
         }
     }
     
-    /*public void updateLoginfo(boolean keeploggedin) {
-    String sql = "UPDATE loginfo SET keeploggedin = ? ";
+    //************NEW USER **************************
     
-    try (Connection conn = this.connect();
-    PreparedStatement pstmt = conn.prepareStatement(sql)) {
-    
-    // set the corresponding param
-    pstmt.setBoolean(1, keeploggedin);
-    // update
-    pstmt.executeUpdate();
-    } catch (SQLException e) {
-    System.out.println(e.getMessage());
+    public boolean selectNewUser(int id) {
+        boolean newUser = true;
+        String sql = "SELECT id, newuser FROM appdata";
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            while (rs.next()) {
+               int userId = rs.getInt("id");
+               boolean newUserInfo = rs.getBoolean("newUser");
+                if (id == userId) {
+                    newUser = newUserInfo;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return newUser;
     }
-    }*/
     
-    //petencjalnie, metoda delete from database, używana przy wylogowaniu
+    public void updateNewUser(boolean newUser, int id) {
+        String sql = "UPDATE appdata SET newuser = ? "
+                + "WHERE id = ?";
+ 
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+ 
+            // set the corresponding param
+            pstmt.setBoolean(1, newUser);
+            pstmt.setInt(2, id);
+            // update 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+     //************DELETE USER **************************
+    
+    public void deleteUser(int id) {
+        String sql = "DELETE FROM logindata WHERE id = ?";
+ 
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+ 
+            // set the corresponding param
+            pstmt.setInt(1, id);
+            // execute the delete statement
+            pstmt.executeUpdate();
+ 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        String sql2 = "DELETE FROM appdata WHERE id = ?";
+ 
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql2)) {
+ 
+            // set the corresponding param
+            pstmt.setInt(1, id);
+            // execute the delete statement
+            pstmt.executeUpdate();
+ 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void updateUserName(String name, int id) {
+        String sql = "UPDATE logindata SET name = ? "
+                + "WHERE id = ?";
+ 
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+ 
+            // set the corresponding param
+            pstmt.setString(1, name);
+            pstmt.setInt(2, id);
+            // update 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void updateUserPassword(String pass, int id) {
+        String sql = "UPDATE logindata SET password = ? "
+                + "WHERE id = ?";
+ 
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+ 
+            // set the corresponding param
+            pstmt.setString(1, pass);
+            pstmt.setInt(2, id);
+            // update 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+     public String selectUserPassword(String name){
+        String password = null;
+        String sql = "SELECT password, name FROM logindata";
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            while (rs.next()) {
+               String n = rs.getString("name");
+               password = rs.getString("password");
+                if (name.equals(n)) {
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return password;
+    }
+    
 }

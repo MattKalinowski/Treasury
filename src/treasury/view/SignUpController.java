@@ -1,9 +1,12 @@
 package treasury.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import treasury.Main;
 
 public class SignUpController {
@@ -31,6 +34,10 @@ public class SignUpController {
     private Label nameAlert2;
     @FXML 
     private Label termsAlert;
+    @FXML
+    private Button signupButton;
+    @FXML
+    private AnchorPane anchorPane;
     
     private String username;
     private String password;
@@ -38,6 +45,15 @@ public class SignUpController {
 
     public void setMain(Main main) {
         this.main = main;
+    }
+    
+    // allows to press a button using "enter"
+    public void initialize() {
+        anchorPane.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+              signupButton.fire();
+             }
+        }); 
     }
     
     @FXML
@@ -61,7 +77,7 @@ public class SignUpController {
         main.setPass(password);
         main.setEmail(email);
         main.getDatabase().insertLoginData(username, password, email);
-        main.getDatabase().insertInitialAppData(false, 0, 0, main.getCurrency());
+        main.getDatabase().insertInitialAppData(true, 0, 0, main.getCurrency());
     }
     
     private boolean validateTextFields() {
@@ -120,6 +136,11 @@ public class SignUpController {
             termsAlert.setVisible(false);
             return true;
         }
+    }
+    
+    @FXML
+    private void unfocus() {
+        anchorPane.requestFocus();
     }
 
 }

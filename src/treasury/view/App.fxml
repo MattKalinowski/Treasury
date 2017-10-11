@@ -7,25 +7,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treasury.view.AppController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" onMouseClicked="#unfocus" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treasury.view.AppController">
    <children>
       <ImageView fx:id="graphics" fitHeight="600.0" fitWidth="500.0" pickOnBounds="true" />
-      <Button focusTraversable="false" layoutX="152.0" layoutY="475.0" mnemonicParsing="false" onAction="#handleWithdrawal" prefHeight="91.0" prefWidth="92.0" styleClass="withdrawalbutton" stylesheets="@GraphicController.css" />
-      <Button focusTraversable="false" layoutX="258.0" layoutY="474.0" mnemonicParsing="false" onAction="#handleDeposit" prefHeight="91.0" prefWidth="92.0" styleClass="depositbutton" stylesheets="@GraphicController.css" />
+      <Button focusTraversable="false" layoutX="158.0" layoutY="474.0" mnemonicParsing="false" onAction="#handleWithdrawal" prefHeight="91.0" prefWidth="92.0" styleClass="withdrawalbutton" stylesheets="@GraphicController.css" />
+      <Button focusTraversable="false" layoutX="263.0" layoutY="474.0" mnemonicParsing="false" onAction="#handleDeposit" prefHeight="91.0" prefWidth="92.0" styleClass="depositbutton" stylesheets="@GraphicController.css" />
       <Button focusTraversable="false" layoutX="416.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="55.0" prefWidth="71.0" styleClass="settingsbutton" stylesheets="@GraphicController.css" />
       <Button focusTraversable="false" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleInfo" prefHeight="47.0" prefWidth="36.0" styleClass="info" stylesheets="@GraphicController.css" />
-      <TextField fx:id="textField" focusTraversable="false" layoutX="151.0" layoutY="399.0" prefHeight="68.0" prefWidth="197.0" styleClass="deposittextfield" stylesheets="@GraphicController.css">
+      <TextField fx:id="textField" focusTraversable="false" layoutX="159.0" layoutY="404.0" minHeight="47.0" minWidth="147.0" prefHeight="62.0" prefWidth="190.0" styleClass="deposittextfield" stylesheets="@GraphicController.css">
          <font>
-            <Font size="37.0" />
+            <Font name="AppleGothic Regular" size="38.0" />
          </font></TextField>
-      <Label fx:id="amountOfMoney" alignment="CENTER" contentDisplay="RIGHT" layoutX="106.0" layoutY="343.0" prefHeight="55.0" prefWidth="326.0" text="100" textFill="#ffe100">
+      <Label fx:id="amountOfMoney" alignment="CENTER" contentDisplay="RIGHT" layoutX="97.0" layoutY="342.0" prefHeight="65.0" prefWidth="332.0" textFill="#ffe100">
          <font>
-            <Font size="44.0" />
+            <Font name="AppleGothic Regular" size="44.0" />
          </font>
          <graphic>
-            <Label fx:id="currencySymbol" prefHeight="55.0" prefWidth="59.0" text="PLN" textAlignment="RIGHT" textFill="#ffe100">
+            <Label fx:id="currencySymbol" prefHeight="55.0" prefWidth="59.0" textAlignment="RIGHT" textFill="#ffe100">
                <font>
-                  <Font size="30.0" />
+                  <Font name="AppleGothic Regular" size="30.0" />
                </font>
             </Label>
          </graphic>

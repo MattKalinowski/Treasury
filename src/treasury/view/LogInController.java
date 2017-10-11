@@ -1,19 +1,19 @@
 package treasury.view;
 
-import java.net.URL;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import treasury.Main;
 
-public class LogInController implements Initializable {
+public class LogInController {
 
     private Main main;
     @FXML
@@ -25,10 +25,22 @@ public class LogInController implements Initializable {
     @FXML
     private Button switchLanguageButton;
     private boolean keepLoggedIn;
+    private boolean newUser;
+    @FXML
+    private Button loginButton;
+    @FXML
+    private AnchorPane anchorPane;
+    @FXML
+    private Label alert;
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        
+    
+     // allows to press a button using "enter"
+    public void initialize() {
+        anchorPane.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+              loginButton.fire();
+             }
+        }); 
     }
     
     public void setMain(Main main) {
@@ -72,12 +84,13 @@ public class LogInController implements Initializable {
         if (main.getDatabase().verifyLoginData(typedName, typedPassHash)) {
             main.getDatabase().insertLoginfo(1, keepLoggedIn, name.getText());
             loadAppData(typedName);
+            if (newUser) {
+                main.showWelcomeToTreasury();
+            } else {
             main.showApp();
+            }
         } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(main.getWindow());
-            alert.setHeaderText(main.getBundle().getString("inwalidpassandname"));
-            alert.showAndWait(); 
+            alert.setVisible(true);
         }
     }
 
@@ -87,6 +100,7 @@ public class LogInController implements Initializable {
         main.setMoney(main.getDatabase().selectMoney(userId));
         main.setGoal(main.getDatabase().selectGoal(userId));
         main.setCurrency(main.getDatabase().selectCurrency(userId));
+        newUser = main.getDatabase().selectNewUser(userId);
     }
     
     public boolean getLogInfo() {
@@ -105,6 +119,11 @@ public class LogInController implements Initializable {
             switchLanguageButton.pseudoClassStateChanged(buttonEnPseudoClass, true);
         }
         
+    }
+    
+    @FXML
+    private void unfocus() {
+        anchorPane.requestFocus();
     }
     
 }

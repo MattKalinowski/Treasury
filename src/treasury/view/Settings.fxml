@@ -9,93 +9,85 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="500.0" styleClass="themetheme" stylesheets="@GraphicController.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treasury.view.SettingsController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="500.0" styleClass="themetheme" stylesheets="@GraphicController.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treasury.view.SettingsController">
    <children>
       <Label layoutX="180.0" layoutY="37.0" text="%settings" textFill="#ffae35">
          <font>
-            <Font size="33.0" />
+            <Font name="AppleGothic Regular" size="33.0" />
          </font>
       </Label>
       <Separator layoutX="51.0" layoutY="102.0" prefHeight="2.0" prefWidth="400.0" />
-      <Button focusTraversable="false" layoutX="63.0" layoutY="439.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="84.0" prefWidth="129.0" styleClass="bigbutton">
-         <graphic>
-            <Label prefHeight="24.0" prefWidth="25.0" text="OK">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-         </graphic></Button>
-      <Label layoutX="61.0" layoutY="118.0" text="%user" textFill="#ffae35">
+      <Button fx:id="okButton" focusTraversable="false" layoutX="63.0" layoutY="439.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="74.0" prefWidth="122.0" styleClass="bigbutton" text="OK">
          <font>
-            <Font size="23.0" />
+            <Font name="AppleGothic Regular" size="13.0" />
+         </font></Button>
+      <Label layoutX="64.0" layoutY="115.0" text="%user" textFill="#ffae35">
+         <font>
+            <Font name="AppleGothic Regular" size="23.0" />
          </font>
       </Label>
-      <Label fx:id="name" layoutX="196.0" layoutY="119.0" prefHeight="28.0" prefWidth="235.0">
+      <Label fx:id="name" layoutX="200.0" layoutY="119.0" prefHeight="28.0" prefWidth="235.0" textFill="#ffae35">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Button focusTraversable="false" layoutX="59.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleChangeName" prefHeight="40.0" prefWidth="139.0" styleClass="changebutton" stylesheets="@GraphicController.css">
-         <graphic>
-            <Label alignment="CENTER" prefHeight="19.0" prefWidth="108.0" text="%changename">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-         </graphic>
+      <Button focusTraversable="false" layoutX="63.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleChangeName" prefHeight="28.0" prefWidth="129.0" styleClass="changebutton" stylesheets="@GraphicController.css" text="%changename">
          <opaqueInsets>
             <Insets />
-         </opaqueInsets></Button>
-      <Button focusTraversable="false" layoutX="59.0" layoutY="149.0" mnemonicParsing="false" onAction="#handleChangePassword" prefHeight="40.0" prefWidth="139.0" styleClass="changebutton" stylesheets="@GraphicController.css">
-         <graphic>
-            <Label text="%changepass">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-         </graphic></Button>
+         </opaqueInsets>
+         <font>
+            <Font name="AppleGothic Regular" size="13.0" />
+         </font></Button>
+      <Button focusTraversable="false" layoutX="63.0" layoutY="149.0" mnemonicParsing="false" onAction="#handleChangePassword" prefHeight="28.0" prefWidth="129.0" styleClass="changebutton" stylesheets="@GraphicController.css" text="%changepass">
+         <font>
+            <Font name="AppleGothic Regular" size="13.0" />
+         </font></Button>
       <Separator layoutX="51.0" layoutY="234.0" prefHeight="3.0" prefWidth="400.0" />
-      <Button focusTraversable="false" layoutX="194.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="84.0" prefWidth="129.0" styleClass="bigbutton">
-         <graphic>
-            <Label prefHeight="33.0" prefWidth="54.0" text="%logout">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-         </graphic></Button>
-      <Label layoutX="60.0" layoutY="255.0" text="%goal" textFill="#ffae35">
+      <Button focusTraversable="false" layoutX="201.0" layoutY="149.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="67.0" prefWidth="106.0" styleClass="bigbutton" text="%logout">
          <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="goal" alignment="CENTER_RIGHT" layoutX="181.0" layoutY="247.0" prefHeight="51.0" prefWidth="129.0" textAlignment="RIGHT">
+            <Font name="AppleGothic Regular" size="13.0" />
+         </font></Button>
+      <Button focusTraversable="false" layoutX="368.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleChangeGoal" prefHeight="40.0" prefWidth="66.0" styleClass="bigbutton" text="%change">
          <font>
-            <Font size="35.0" />
-         </font>
-      </Label>
-      <Button focusTraversable="false" layoutX="379.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleChangeGoal" prefHeight="51.0" prefWidth="84.0" styleClass="bigbutton">
-         <graphic>
-            <Label prefHeight="17.0" prefWidth="54.0" text="%change" />
-         </graphic></Button>
+            <Font name="AppleGothic Regular" size="13.0" />
+         </font></Button>
       <Separator layoutX="51.0" layoutY="313.0" prefHeight="3.0" prefWidth="400.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="65.0" layoutY="339.0" text="%lan" textFill="#ffae35">
+      <Label alignment="CENTER_RIGHT" layoutX="27.0" layoutY="338.0" prefHeight="26.0" prefWidth="121.0" text="%lan" textFill="#ffae35">
          <font>
-            <Font size="17.0" />
+            <Font name="AppleGothic Regular" size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" layoutX="66.0" layoutY="372.0" text="%curr" textFill="#ffae35">
+      <Label alignment="CENTER_RIGHT" layoutX="43.0" layoutY="367.0" prefHeight="26.0" prefWidth="106.0" text="%curr" textFill="#ffae35">
          <font>
-            <Font size="17.0" />
+            <Font name="AppleGothic Regular" size="17.0" />
          </font>
       </Label>
       <ImageView fx:id="flag" fitHeight="23.0" fitWidth="34.0" layoutX="262.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="currencySymbol" layoutX="314.0" layoutY="247.0" prefHeight="51.0" prefWidth="66.0" text="PLN" textFill="#ffae35">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <ChoiceBox fx:id="currencyBox" focusTraversable="false" layoutX="158.0" layoutY="370.0" prefHeight="40.0" prefWidth="97.0" styleClass="listbutton" />
-      <ChoiceBox fx:id="languagesBox" focusTraversable="false" layoutX="158.0" layoutY="339.0" prefHeight="40.0" prefWidth="97.0" styleClass="listbutton" />
+      <ChoiceBox fx:id="currencyBox" focusTraversable="false" layoutX="158.0" layoutY="370.0" prefHeight="28.0" prefWidth="94.0" styleClass="listbutton" />
+      <ChoiceBox fx:id="languagesBox" focusTraversable="false" layoutX="158.0" layoutY="339.0" prefHeight="28.0" prefWidth="94.0" styleClass="listbutton" />
       <Separator layoutX="50.0" layoutY="420.0" prefHeight="3.0" prefWidth="400.0" />
+      <Label contentDisplay="RIGHT" layoutX="59.0" layoutY="245.0" prefHeight="59.0" prefWidth="304.0" text="%goal" textFill="#ffae35">
+         <font>
+            <Font name="AppleGothic Regular" size="18.0" />
+         </font>
+         <graphic>
+            <Label fx:id="goal" contentDisplay="RIGHT" prefHeight="52.0" prefWidth="211.0" text="1000" textAlignment="RIGHT" textFill="#ffae35">
+               <font>
+                  <Font name="AppleGothic Regular" size="35.0" />
+               </font>
+               <graphic>
+                  <Label fx:id="currencySymbol" prefHeight="51.0" prefWidth="66.0" text="PLN" textFill="#ffae35">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Label>
+         </graphic>
+      </Label>
+      <Button layoutX="318.0" layoutY="149.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="67.0" prefWidth="106.0" styleClass="bigbutton" stylesheets="@GraphicController.css" text="%delete" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="AppleGothic Regular" size="13.0" />
+         </font></Button>
    </children>
 </AnchorPane>
