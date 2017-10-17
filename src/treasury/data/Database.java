@@ -39,7 +39,7 @@ public class Database {
         
         try (Connection conn = DriverManager.getConnection(url);
                 Statement stmt = conn.createStatement()) {
-            // create a new table
+
             stmt.execute(sql);
             stmt.execute(sql2);
             stmt.execute(sql3);
@@ -51,7 +51,6 @@ public class Database {
     
     private Connection connect() {
         createNewTables();
-        // SQLite connection string
         String url = "jdbc:sqlite:userdata.db";
         Connection conn = null;
         try {
@@ -94,6 +93,7 @@ public class Database {
     }
     
     public void updateLoginData(String name, String password, String email) {
+        System.out.println("test");
         String sql = "UPDATE logindata SET name = ? , "
                 + "    password = ? , "
                 + "    email = ?";
@@ -101,20 +101,14 @@ public class Database {
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
-            // set the corresponding param
             pstmt.setString(1, name);
             pstmt.setString(2, password);
             pstmt.setString(3, email);
-            // update 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    /*
-    PLACE FOR ANOTHER UPDATE METHOD
-    */
     
     public boolean verifyLoginData(String n, String p){
         String sql = "SELECT name, password FROM logindata";

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import treasury.Main;
 
 public class SignUpController {
@@ -26,6 +27,8 @@ public class SignUpController {
     private Label emailAlert1;
     @FXML
     private Label emailAlert2;
+    @FXML
+    private Label emailAlert3;
     @FXML
     private Label passwordAlert;
     @FXML
@@ -57,16 +60,14 @@ public class SignUpController {
     }
     
     @FXML
-    private void handleSignUpWithFacebook() {
-        
-    }
-    @FXML
     private void handleLogIn() {
+        playClickSound();
         main.showLogIn();
     }
     
     @FXML
     private void handleSignUp() {
+        playClickSound();
         if (validateTextFields()) {
             createAnAccount();
             main.showLogIn();
@@ -86,18 +87,28 @@ public class SignUpController {
     }
     
     private boolean validateEmail() {
+        boolean validate;
         email = emailField.getText();
         String confirmEmail = confirmEmailField.getText();
-        if (!email.equals(confirmEmail) || email.isEmpty()) {
+        if (!email.equals(confirmEmail)) {
             emailAlert2.setVisible(true);
-            return false;
-        } else if (main.getDatabase().selectUserEmail(email)) {
-            emailAlert1.setVisible(true);
-            return false;
+            validate = false;
         } else {
             emailAlert2.setVisible(false);
-            return true;
         }
+        if (email.isEmpty()) {
+            emailAlert3.setVisible(true);
+            validate = false;
+        } else {
+            emailAlert3.setVisible(false);
+        }
+        if (main.getDatabase().selectUserEmail(email)) {
+            emailAlert1.setVisible(true);
+            validate = false;
+        } else {
+            emailAlert1.setVisible(false);
+        }
+        return !(validate = false);
     }
     
     private boolean validateName() {
@@ -141,6 +152,11 @@ public class SignUpController {
     @FXML
     private void unfocus() {
         anchorPane.requestFocus();
+    }
+    
+    private void playClickSound() {
+        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
+        click.play();
     }
 
 }

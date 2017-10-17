@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import treasury.Main;
 
 public class WelcomeToTreasuryController {
@@ -32,7 +33,13 @@ public class WelcomeToTreasuryController {
     
     @FXML
     private void handleOkButton() {
+        playClickSound();
         main.showSetInitialGoal();
+    }
+    
+    private void playClickSound() {
+        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
+        click.play();
     }
     
 }

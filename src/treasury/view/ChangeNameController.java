@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import treasury.Main;
 
@@ -40,10 +41,11 @@ public class ChangeNameController {
     @FXML
     private void handleAccept() {
         String name;
+        int id = main.getDatabase().selectUserId(main.getName());
         if (validateName()) {
+        playClickSound();
         main.setName(textField.getText());
         name = main.getName();
-        int id = main.getDatabase().selectUserId(name);
         main.getDatabase().updateUserName(name, id);
         main.showSettings();
         changeNameStage.close();
@@ -51,6 +53,7 @@ public class ChangeNameController {
     }
     @FXML
     private void handleCancel() {
+        playClickSound();
         changeNameStage.close();
     }
     
@@ -71,6 +74,11 @@ public class ChangeNameController {
            // nameAlert2.setVisible(false);
             return true;
         }
+    }
+    
+    private void playClickSound() {
+        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
+        click.play();
     }
     
 }

@@ -17,6 +17,7 @@ import treasury.model.Model;
 import treasury.view.AppController;
 import treasury.view.ChangeNameController;
 import treasury.view.ChangePassController;
+import treasury.view.CongratulationsController;
 import treasury.view.DeleteAccountController;
 import treasury.view.InfoController;
 import treasury.view.LogInController;
@@ -38,20 +39,18 @@ public class Main extends Application {
     private String name;
     private String password;
     private String email;
-    private String currency;
     private String language;
+    private String currency;
+    private boolean autolog;
     private int money;
     private int goal;
-    private boolean autolog;
     
     @Override
     public void start(Stage primaryStage) {
         
         window = primaryStage;
         window.setTitle("Treasury");
-        //sets system language 
         setLanguage();
-        goal = 0;
         mod.setMain(this);
         initRootLayout();
         showLogIn();
@@ -75,7 +74,6 @@ public class Main extends Application {
     public void showLogIn() {
         try {   
             FXMLLoader loader = new FXMLLoader();
-            //separate bundle variable for translating alert windows
             bundle = ResourceBundle.getBundle("treasury.view.lang", locale);
             loader.setResources(bundle);
             loader.setLocation(Main.class.getResource("view/LogIn.fxml"));
@@ -93,11 +91,11 @@ public class Main extends Application {
                 controller.loadAppData(name);
                 showApp();
             }
-        
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
     public void showSignUp() {
         try {   
             FXMLLoader loader = new FXMLLoader();
@@ -115,6 +113,27 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
+    public void showWelcomeToTreasury() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            bundle = ResourceBundle.getBundle("treasury.view.lang", locale);
+            loader.setResources(bundle);
+            loader.setLocation(Main.class.getResource("view/WelcomeToTreasury.fxml"));
+            AnchorPane welcomeToTreasury = (AnchorPane) loader.load();
+            
+            rootLayout.setCenter(welcomeToTreasury);
+            int UserId = 1;
+            window.setOnCloseRequest(event -> {getDatabase().deleteLoginfo(UserId);} );
+            
+            WelcomeToTreasuryController controller = loader.getController();
+            controller.setMain(this);
+        
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void showApp() {
         try {   
             FXMLLoader loader = new FXMLLoader();
@@ -135,25 +154,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-    public void showWelcomeToTreasury() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            bundle = ResourceBundle.getBundle("treasury.view.lang", locale);
-            loader.setResources(bundle);
-            loader.setLocation(Main.class.getResource("view/WelcomeToTreasury.fxml"));
-            AnchorPane welcomeToTreasury = (AnchorPane) loader.load();
-            
-            rootLayout.setCenter(welcomeToTreasury);
-            int UserId = 1;
-            window.setOnCloseRequest(event -> {getDatabase().deleteLoginfo(UserId);} );
-            
-            WelcomeToTreasuryController controller = loader.getController();
-            controller.setMain(this);
-        
-            } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    
     public void showSettings() {
         try {   
             FXMLLoader loader = new FXMLLoader();
@@ -174,6 +175,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
     public void showTerms() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -198,6 +200,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
     public void showInfo() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -222,6 +225,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
     public void showSetGoal() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -247,6 +251,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
     public void showSetInitialGoal() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -272,6 +277,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
     public void showChangePass() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -297,6 +303,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
     public void showChangeName() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -348,25 +355,56 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
+    public void showCongratulations() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            bundle = ResourceBundle.getBundle("treasury.view.lang", locale);
+            loader.setResources(bundle);
+            loader.setLocation(Main.class.getResource("view/Congratulations.fxml"));
+            AnchorPane congratulations = (AnchorPane) loader.load();
+            
+            Stage congratulationsStage = new Stage();
+            congratulationsStage.initModality(Modality.WINDOW_MODAL);
+            congratulationsStage.initStyle(StageStyle.UNDECORATED);
+            congratulationsStage.initOwner(window);
+            Scene scene = new Scene(congratulations);
+            congratulationsStage.setScene(scene);
+            
+            CongratulationsController controller = loader.getController();
+            controller.congratulationStage(congratulationsStage);
+            controller.setMain(this);
+        
+            congratulationsStage.showAndWait();
+            
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
+    
     public Stage getWindow() {
         return window;
     }
+    
     public Model getModel() {
         return mod;
     }
+    
     public Locale getLocale() {
         return locale;
     }
+    
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
+    
     public ResourceBundle getBundle() {
         return bundle;
     }
-    
     
     public void setLanguage() {
         if (getDatabase().selectLanguage() == null) {
@@ -376,7 +414,6 @@ public class Main extends Application {
             setLocale(new Locale(getDatabase().selectLanguage()));
         }
     }
-    
     
     public String getLanguageString() {
         String lang = locale.getLanguage();
@@ -392,11 +429,13 @@ public class Main extends Application {
         }
         return language;
     }
+    
     public void setCurrency(String currency) {
         this.currency = currency;
         int userId = getDatabase().selectUserId(name);
         getDatabase().updateCurrency(currency, userId);
     }
+    
     public void setDefaultCurrency() {
         int userId = getDatabase().selectUserId(name);
         if(getDatabase().selectCurrency(userId) == null) {
@@ -414,51 +453,65 @@ public class Main extends Application {
         getDatabase().updateCurrency(currency, userId);
         } 
     }
+    
     public String getCurrency() {
         return currency;
     }
+    
     public int getGoal() {
         return goal;
     }
+    
     public void setGoal(int goal) {
         this.goal = goal;
         int userId = getDatabase().selectUserId(name);
         getDatabase().updateGoal(goal, userId);
         
     }
+    
     public String getName() {
         return name;
     }
+    
     public void setName(String name) {
         this.name = name;
     }
+    
     public String getPass() {
         return password;
     }
+    
     public void setPass(String password) {
         this.password = password;
     }
+    
     public String getPasswordHash(String password) {
         String hash = Security.getHash(password.getBytes(), "SHA-224");
         return hash;
     }
+    
     public String getEmail() {
         return email;
     }
+    
     public void setEmail(String email) {
         this.email = email;
     }
+    
     public Database getDatabase() {
         return database;
     }
+    
     public int getMoney() {
         return money;
     }
+    
     public void setMoney(int money) {
         this.money = money;
         int userId = getDatabase().selectUserId(name);
         getDatabase().updateMoney(money, userId);
     }
+    
     private void autolog(boolean keeploggedin, String name) {
         autolog = keeploggedin;
         this.name = name;

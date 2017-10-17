@@ -9,6 +9,7 @@ import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import treasury.Main;
 
 public class AppController {
@@ -48,17 +49,20 @@ public class AppController {
     @FXML
     private void handleDeposit() {
         if(!textField.getText().isEmpty()) {
+        playDepositSound();
         int amount = Integer.valueOf(textField.getText());
         main.getModel().deposit(amount);
         updateLabel();
         textField.clear();
         setImage();
+        isGoalReached();
         }
     }
     
     @FXML
     private void handleWithdrawal() {
         if(!textField.getText().isEmpty()) {
+        playWithdrawalSound();
         int amount = Integer.valueOf(textField.getText());
         main.getModel().withdrawal(amount);
         updateLabel();
@@ -69,11 +73,13 @@ public class AppController {
     
     @FXML
     private void handleSettings() {
+        playClickSound();
         main.showSettings();
     }
     
     @FXML
     private void handleInfo() {
+        playClickSound();
         main.showInfo();
     }
     private void updateLabel() {
@@ -190,9 +196,31 @@ public class AppController {
         return imageUrl;
     }
     
+    private void isGoalReached() {
+        double progress = calculatePercentageProgress();
+        if (progress >= 100) {
+            main.showCongratulations();
+        }
+    }
+    
     @FXML
     private void unfocus() {
         anchorPane.requestFocus();
+    }
+    
+    private void playClickSound() {
+        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
+        click.play();
+    }
+    
+    private void playDepositSound() {
+        AudioClip deposit = new AudioClip(this.getClass().getResource("sounds/deposit.wav").toString());
+        deposit.play();
+    }
+    
+    private void playWithdrawalSound() {
+        AudioClip withdrawal = new AudioClip(this.getClass().getResource("sounds/withdrawal.wav").toString());
+        withdrawal.play();
     }
     
 }

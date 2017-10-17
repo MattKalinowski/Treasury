@@ -1,12 +1,12 @@
 package treasury.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import treasury.Main;
 
@@ -45,9 +45,11 @@ public class ChangePassController {
     @FXML
     private void handleAccept() {
         passwordChange();
+        playClickSound();
     }
     @FXML
     private void handleCancel() {
+        playClickSound();
         changePassStage.close();
     }
     private void passwordChange() {
@@ -81,6 +83,11 @@ public class ChangePassController {
     @FXML
     private void unfocus() {
         anchorPane.requestFocus();
+    }
+    
+    private void playClickSound() {
+        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
+        click.play();
     }
     
 }

@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import treasury.Main;
 
 public class SettingsController {
@@ -68,21 +69,25 @@ public class SettingsController {
 
     @FXML
     private void handleOk() {
+        playClickSound();
         main.showApp();
     }
     @FXML
     
     private void handleChangePassword() {
+        playClickSound();
         main.showChangePass();
     }
     @FXML
     
     private void handleChangeName() {
+        playClickSound();
         main.showChangeName();
     }
     
     @FXML
     private void handleLogout() {
+        playClickSound();
         int id = 1;
         main.getDatabase().deleteLoginfo(id);
         main.showLogIn();
@@ -90,11 +95,13 @@ public class SettingsController {
     
     @FXML
     private void handleDelete() {
+        playClickSound();
         main.showDeleteAccount();
     }
     
     @FXML
     private void handleChangeGoal() {
+        playClickSound();
         main.showSetGoal();
     }
     
@@ -165,6 +172,11 @@ public class SettingsController {
     
     public void setGoalLabel() {
         goal.setText(String.valueOf(main.getGoal()));
+    }
+    
+    private void playClickSound() {
+        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
+        click.play();
     }
     
 }
