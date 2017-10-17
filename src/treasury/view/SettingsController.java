@@ -17,6 +17,7 @@ import treasury.Main;
 public class SettingsController {
 
     private Main main;
+    
     @FXML
     private Label name;
     @FXML
@@ -72,14 +73,14 @@ public class SettingsController {
         playClickSound();
         main.showApp();
     }
-    @FXML
     
+    @FXML
     private void handleChangePassword() {
         playClickSound();
         main.showChangePass();
     }
-    @FXML
     
+    @FXML
     private void handleChangeName() {
         playClickSound();
         main.showChangeName();

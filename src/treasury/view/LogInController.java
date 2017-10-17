@@ -16,6 +16,9 @@ import treasury.Main;
 public class LogInController {
 
     private Main main;
+    private boolean keepLoggedIn;
+    private boolean newUser;
+    
     @FXML
     private TextField name;
     @FXML
@@ -24,8 +27,6 @@ public class LogInController {
     private CheckBox keepLoggedInBox;
     @FXML
     private Button switchLanguageButton;
-    private boolean keepLoggedIn;
-    private boolean newUser;
     @FXML
     private Button loginButton;
     @FXML
@@ -33,9 +34,10 @@ public class LogInController {
     @FXML
     private Label alert;
     
-    
-     // allows to press a button using "enter"
     public void initialize() {
+        /*
+           Accepting changes by clicking Enter button
+        */
         anchorPane.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER){
               loginButton.fire();
@@ -47,20 +49,24 @@ public class LogInController {
             this.main = main;
             switchLangButtonPicture(main.getLocale().getLanguage());
     }
+    
     @FXML
     private void handleLogIn() {
         playClickSound();
         validate();
     }
+    
     @FXML
     private void handleSignUp() {
         playClickSound();
         main.showSignUp();
     }
+    
     @FXML
     private void handleTerms() {
         main.showTerms();
     }
+    
     @FXML
     private void handleLanguageSwitch() {
         playClickSound();
@@ -75,6 +81,7 @@ public class LogInController {
         }
         main.setDefaultCurrency();
     }
+    
     @FXML
     private void handleKeepLoggedIn() {
         keepLoggedIn = keepLoggedInBox.isSelected();
@@ -103,7 +110,7 @@ public class LogInController {
         main.setMoney(main.getDatabase().selectMoney(userId));
         main.setGoal(main.getDatabase().selectGoal(userId));
         main.setCurrency(main.getDatabase().selectCurrency(userId));
-        newUser = main.getDatabase().selectNewUser(userId);
+        newUser = main.getDatabase().IsUserNew(userId);
     }
     
     public boolean getLogInfo() {

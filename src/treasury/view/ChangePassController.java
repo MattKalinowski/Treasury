@@ -14,6 +14,7 @@ public class ChangePassController {
 
     private Stage changePassStage;
     private Main main;
+    
     @FXML
     private PasswordField oldPass;
     @FXML
@@ -28,6 +29,9 @@ public class ChangePassController {
     private Label alert2;
 
     public void initialize() {
+        /*
+           Accepting changes by clicking Enter button
+        */
         anchorPane.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER){
               acceptButton.fire();
@@ -42,16 +46,19 @@ public class ChangePassController {
     public void setMain(Main main) {
         this.main = main;
     }
+    
     @FXML
     private void handleAccept() {
         passwordChange();
         playClickSound();
     }
+    
     @FXML
     private void handleCancel() {
         playClickSound();
         changePassStage.close();
     }
+    
     private void passwordChange() {
         String oldPassInput = oldPass.getText();
         String newPassInput = newPass.getText();

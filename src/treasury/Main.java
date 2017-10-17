@@ -19,13 +19,11 @@ import treasury.view.ChangeNameController;
 import treasury.view.ChangePassController;
 import treasury.view.CongratulationsController;
 import treasury.view.DeleteAccountController;
-import treasury.view.InfoController;
 import treasury.view.LogInController;
 import treasury.view.SetGoalController;
 import treasury.view.SetInitialGoalController;
 import treasury.view.SettingsController;
 import treasury.view.SignUpController;
-import treasury.view.TermsController;
 import treasury.view.WelcomeToTreasuryController;
 
 public class Main extends Application {
@@ -84,7 +82,7 @@ public class Main extends Application {
         LogInController controller = loader.getController();
         controller.setMain(this);
         
-        boolean loginfo = getDatabase().selectLoginfo();
+        boolean loginfo = getDatabase().isLoggedIn();
         String loginfoName = getDatabase().selectLoginfoName();
         autolog(loginfo, loginfoName);
             if (autolog) {
@@ -190,10 +188,6 @@ public class Main extends Application {
             Scene scene = new Scene(terms);
             termsStage.setScene(scene);
             
-            TermsController controller = loader.getController();
-            controller.setTermsStage(termsStage);
-            controller.setMain(this);
-        
             termsStage.showAndWait();
             
             } catch (IOException e) {
@@ -215,10 +209,6 @@ public class Main extends Application {
             Scene scene = new Scene(info);
             infoStage.setScene(scene);
             
-            InfoController controller = loader.getController();
-            controller.setInfoStage(infoStage);
-            controller.setMain(this);
-        
             infoStage.showAndWait();
             
             } catch (IOException e) {
@@ -373,7 +363,6 @@ public class Main extends Application {
             
             CongratulationsController controller = loader.getController();
             controller.congratulationStage(congratulationsStage);
-            controller.setMain(this);
         
             congratulationsStage.showAndWait();
             

@@ -13,6 +13,10 @@ import treasury.Main;
 public class SignUpController {
 
     private Main main;
+    private String username;
+    private String password;
+    private String email;
+    
     @FXML
     private TextField emailField;
     @FXML
@@ -42,16 +46,14 @@ public class SignUpController {
     @FXML
     private AnchorPane anchorPane;
     
-    private String username;
-    private String password;
-    private String email;
-
     public void setMain(Main main) {
         this.main = main;
     }
     
-    // allows to press a button using "enter"
     public void initialize() {
+         /*
+           Accepting changes by clicking Enter button
+        */
         anchorPane.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER){
               signupButton.fire();
@@ -73,6 +75,7 @@ public class SignUpController {
             main.showLogIn();
         }
     }
+    
     private void createAnAccount() {
         main.setName(username);
         main.setPass(password);
@@ -102,7 +105,7 @@ public class SignUpController {
         } else {
             emailAlert3.setVisible(false);
         }
-        if (main.getDatabase().selectUserEmail(email)) {
+        if (main.getDatabase().isUserEmailInDatabase(email)) {
             emailAlert1.setVisible(true);
             validate = false;
         } else {
@@ -117,7 +120,7 @@ public class SignUpController {
             nameAlert2.setVisible(true);
             return false;
         } 
-        else if (main.getDatabase().selectUserName(username)) {
+        else if (main.getDatabase().isUserNameInDatabase(username)) {
             nameAlert.setVisible(true);
             return false;
         } else {

@@ -18,6 +18,7 @@ public class SetGoalController {
 
     private Main main;
     private Stage setGoalStage;
+    
     @FXML
     private TextField textField;
     @FXML
@@ -39,7 +40,7 @@ public class SetGoalController {
     };
     
     /**
-     *  prevents from typing numbers longer than i
+     *  prevents from typing numbers longer than i parameter
      */
     public EventHandler<KeyEvent> maxLength(final Integer i) {
         return (KeyEvent arg0) -> {
@@ -68,6 +69,7 @@ public class SetGoalController {
     public void setMain(Main main) {
         this.main = main;
     }
+    
     @FXML
     private void handleAccept() {
         if(!textField.getText().isEmpty()) {
@@ -83,6 +85,7 @@ public class SetGoalController {
         }
       }
     }
+    
     @FXML
     private void handleCancel() {
         playClickSound();

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="218.0" prefWidth="226.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treasury.view.InfoController">
+<AnchorPane id="AnchorPane" prefHeight="218.0" prefWidth="226.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="218.0" fitWidth="236.0" pickOnBounds="true" preserveRatio="true">
          <image>

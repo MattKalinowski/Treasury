@@ -15,6 +15,7 @@ import treasury.Main;
 public class AppController {
 
     private Main main;
+    
     @FXML
     private ImageView graphics;
     @FXML
@@ -39,6 +40,7 @@ public class AppController {
 
     public void setMain(Main main) {
         this.main = main;
+        
         setImage();
         updateLabel();
     }
@@ -49,25 +51,25 @@ public class AppController {
     @FXML
     private void handleDeposit() {
         if(!textField.getText().isEmpty()) {
-        playDepositSound();
         int amount = Integer.valueOf(textField.getText());
         main.getModel().deposit(amount);
         updateLabel();
         textField.clear();
         setImage();
         isGoalReached();
+        playDepositSound();
         }
     }
     
     @FXML
     private void handleWithdrawal() {
         if(!textField.getText().isEmpty()) {
-        playWithdrawalSound();
         int amount = Integer.valueOf(textField.getText());
         main.getModel().withdrawal(amount);
         updateLabel();
         textField.clear();
         setImage();
+        playWithdrawalSound();
         }
     }
     
@@ -82,11 +84,13 @@ public class AppController {
         playClickSound();
         main.showInfo();
     }
+    
     private void updateLabel() {
         amountOfMoney.setText(String.valueOf(main.getMoney()));
     }
+    
     public void setCurrencySymbol() {
-        String currency = main.getCurrency(); //currency jest null
+        String currency = main.getCurrency(); 
         switch (currency) {
             case "USD":
                 currencySymbol.setText("$");
@@ -192,7 +196,6 @@ public class AppController {
         else if (progress > 99) {
             imageUrl = "graphics/Treasure20.png";
         } 
-        
         return imageUrl;
     }
     

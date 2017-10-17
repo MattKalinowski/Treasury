@@ -11,6 +11,7 @@ import treasury.Main;
 public class WelcomeToTreasuryController {
     
     private Main main;
+    
     @FXML
     private Label name;
     @FXML
@@ -24,6 +25,9 @@ public class WelcomeToTreasuryController {
     }
     
     public void initialize() {
+         /*
+           Accepting changes by clicking Enter button
+        */
         anchorPane.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER){
               okButton.fire();

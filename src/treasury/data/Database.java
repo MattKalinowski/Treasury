@@ -61,6 +61,11 @@ public class Database {
         return conn;
     }
     
+    
+    /*
+      * * * * * * CREATING A NEW USER DATA * * * * * * * *
+    */
+    
     public void insertLoginData(String name, String password, String email) {
         String sql = "INSERT INTO logindata(name,password,email) VALUES(?,?,?)";
  
@@ -92,23 +97,9 @@ public class Database {
         }
     }
     
-    public void updateLoginData(String name, String password, String email) {
-        System.out.println("test");
-        String sql = "UPDATE logindata SET name = ? , "
-                + "    password = ? , "
-                + "    email = ?";
- 
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
- 
-            pstmt.setString(1, name);
-            pstmt.setString(2, password);
-            pstmt.setString(3, email);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    /*
+      * * * * * * LOGIN DATA * * * * * * * *
+    */
     
     public boolean verifyLoginData(String n, String p){
         String sql = "SELECT name, password FROM logindata";
@@ -152,7 +143,7 @@ public class Database {
         return id;
     }
     
-    public boolean selectUserName(String n){
+    public boolean isUserNameInDatabase(String n){
         boolean verify = false;
         String sql = "SELECT name FROM logindata";
         
@@ -172,7 +163,7 @@ public class Database {
         return verify;
     }
     
-    public boolean selectUserEmail(String mail){
+    public boolean isUserEmailInDatabase(String mail){
         boolean verify = false;
         String sql = "SELECT email FROM logindata";
         
@@ -220,10 +211,8 @@ public class Database {
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
-            // set the corresponding param
             pstmt.setInt(1, money);
             pstmt.setInt(2, id);
-            // update 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -258,10 +247,8 @@ public class Database {
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
-            // set the corresponding param
             pstmt.setInt(1, goal);
             pstmt.setInt(2, id);
-            // update 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -269,7 +256,9 @@ public class Database {
     }
     
     
-    // *************LANGAUGE******************
+   /*
+      * * * * * * LANGUAGE DATA * * * * * * * *
+    */
     
     public void insertLanguage(String language) {
         String sql = "INSERT INTO language(language) VALUES(?)";
@@ -291,9 +280,8 @@ public class Database {
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
             
-            while (rs.next()) {
-               language = rs.getString("language"); //sprawdzić czy zadziała bez pętli
-            }
+               language = rs.getString("language"); 
+               
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -316,7 +304,9 @@ public class Database {
     }
     
     
-    // *************CURRENCY******************
+   /*
+      * * * * * * CURRENCY DATA * * * * * * * *
+    */
     
     public String selectCurrency(int userId) {
         String currency = null;
@@ -356,7 +346,9 @@ public class Database {
         }
     }
     
-    // *************KEEP LOGGED IN******************
+   /*
+      * * * * * * USER LOGIN STATUS DATA * * * * * * * *
+    */
     
     public void insertLoginfo(int id, boolean keeploggedin, String name) {
         String sql = "INSERT INTO loginfo(id,keeploggedin,name) VALUES(?,?,?)";
@@ -372,7 +364,7 @@ public class Database {
         }
     }
     
-    public boolean selectLoginfo() {
+    public boolean isLoggedIn() {
         boolean keeploggedin = false;
         String sql = "SELECT keeploggedin FROM loginfo";
         
@@ -381,7 +373,7 @@ public class Database {
              ResultSet rs    = stmt.executeQuery(sql)){
             
             while (rs.next()) {
-               keeploggedin = rs.getBoolean("keeploggedin"); //sprawdzić czy zadziała bez pętli
+               keeploggedin = rs.getBoolean("keeploggedin"); 
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -398,7 +390,7 @@ public class Database {
              ResultSet rs    = stmt.executeQuery(sql)){
             
             while (rs.next()) {
-               name = rs.getString("name"); //sprawdzić czy zadziała bez pętli
+               name = rs.getString("name"); 
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -412,9 +404,7 @@ public class Database {
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
-            // set the corresponding param
             pstmt.setInt(1, id);
-            // execute the delete statement
             pstmt.executeUpdate();
  
         } catch (SQLException e) {
@@ -422,9 +412,11 @@ public class Database {
         }
     }
     
-    //************NEW USER **************************
+   /*
+      * * * * * * NEW USER INFORMATION DATA * * * * * * * *
+    */
     
-    public boolean selectNewUser(int id) {
+    public boolean IsUserNew(int id) {
         boolean newUser = true;
         String sql = "SELECT id, newuser FROM appdata";
         
@@ -446,7 +438,7 @@ public class Database {
         return newUser;
     }
     
-    public void updateNewUser(boolean newUser, int id) {
+    public void updateNewUserStatus(boolean newUser, int id) {
         String sql = "UPDATE appdata SET newuser = ? "
                 + "WHERE id = ?";
  
@@ -463,7 +455,9 @@ public class Database {
         }
     }
     
-     //************DELETE USER **************************
+   /*
+      * * * * * * USER DATA MANAGEMENT * * * * * * * *
+    */
     
     public void deleteUser(int id) {
         String sql = "DELETE FROM logindata WHERE id = ?";
@@ -471,15 +465,12 @@ public class Database {
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
-            // set the corresponding param
             pstmt.setInt(1, id);
-            // execute the delete statement
             pstmt.executeUpdate();
  
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
         String sql2 = "DELETE FROM appdata WHERE id = ?";
  
         try (Connection conn = this.connect();
@@ -502,10 +493,8 @@ public class Database {
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
-            // set the corresponding param
             pstmt.setString(1, name);
             pstmt.setInt(2, id);
-            // update 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -519,10 +508,8 @@ public class Database {
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
-            // set the corresponding param
             pstmt.setString(1, pass);
             pstmt.setInt(2, id);
-            // update 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

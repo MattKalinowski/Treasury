@@ -17,6 +17,7 @@ public class SetInitialGoalController {
     
     private Main main;
     private Stage setInitialGoalStage;
+    
     @FXML
     private TextField textField;
     @FXML
@@ -36,7 +37,7 @@ public class SetInitialGoalController {
     };
     
     /**
-     *  prevents from typing numbers longer than i
+     *  prevents from typing numbers longer than i parameter
      */
     public EventHandler<KeyEvent> maxLength(final Integer i) {
         return (KeyEvent arg0) -> {
@@ -71,7 +72,7 @@ public class SetInitialGoalController {
         if(!textField.getText().isEmpty()) {
         playClickSound();
         int id = main.getDatabase().selectUserId(main.getName());
-        main.getDatabase().updateNewUser(false, id);
+        main.getDatabase().updateNewUserStatus(false, id);
         main.setGoal(Integer.valueOf(textField.getText()));
         setInitialGoalStage.close();
         main.showApp();

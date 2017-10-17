@@ -71,9 +71,9 @@
             <Font name="AppleGothic Regular" size="18.0" />
          </font>
          <graphic>
-            <Label fx:id="goal" contentDisplay="RIGHT" prefHeight="52.0" prefWidth="211.0" text="1000" textAlignment="RIGHT" textFill="#ffae35">
+            <Label fx:id="goal" contentDisplay="RIGHT" prefHeight="52.0" prefWidth="210.0" text="100000" textAlignment="RIGHT" textFill="#ffae35">
                <font>
-                  <Font name="AppleGothic Regular" size="35.0" />
+                  <Font name="AppleGothic Regular" size="34.0" />
                </font>
                <graphic>
                   <Label fx:id="currencySymbol" prefHeight="51.0" prefWidth="66.0" text="PLN" textFill="#ffae35">

@@ -10,10 +10,6 @@ public class DeleteAccountController {
     private Stage deleteAccountStage;
     private Main main;
 
-    public void initialize() {
-        // TODO
-    }    
-
     public void DeleteAccountStage(Stage deleteAccountStage) {
         this.deleteAccountStage = deleteAccountStage;
     }

@@ -14,6 +14,7 @@ public class ChangeNameController {
 
     private Stage changeNameStage;
     private Main main;
+    
     @FXML
     private TextField textField;
     @FXML
@@ -24,6 +25,9 @@ public class ChangeNameController {
     private Label alert;
 
     public void initialize() {
+        /*
+           Accepting changes by clicking Enter button
+        */
         anchorPane.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER){
               acceptButton.fire();
@@ -38,6 +42,7 @@ public class ChangeNameController {
     public void setMain(Main main) {
         this.main = main;
     }
+    
     @FXML
     private void handleAccept() {
         String name;
@@ -51,6 +56,7 @@ public class ChangeNameController {
         changeNameStage.close();
         }
     }
+    
     @FXML
     private void handleCancel() {
         playClickSound();
@@ -67,11 +73,10 @@ public class ChangeNameController {
         if (username.isEmpty()) {
             return false;
         } 
-        else if (main.getDatabase().selectUserName(username)) {
+        else if (main.getDatabase().isUserNameInDatabase(username)) {
             alert.setVisible(true);
             return false;
         } else {
-           // nameAlert2.setVisible(false);
             return true;
         }
     }
