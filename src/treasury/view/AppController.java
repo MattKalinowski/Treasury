@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import treasury.Main;
+import treasury.util.Utility;
 
 public class AppController {
 
@@ -44,6 +45,7 @@ public class AppController {
         setImage();
         updateLabel();
     }
+    
     public void initialize() {
         textField.setTextFormatter(new TextFormatter<>(integerFilter));
     }   
@@ -57,7 +59,7 @@ public class AppController {
         textField.clear();
         setImage();
         isGoalReached();
-        playDepositSound();
+        Utility.playDepositSound();
         }
     }
     
@@ -69,19 +71,19 @@ public class AppController {
         updateLabel();
         textField.clear();
         setImage();
-        playWithdrawalSound();
+        Utility.playWithdrawalSound();
         }
     }
     
     @FXML
     private void handleSettings() {
-        playClickSound();
+        Utility.playClickSound();
         main.showSettings();
     }
     
     @FXML
     private void handleInfo() {
-        playClickSound();
+        Utility.playClickSound();
         main.showInfo();
     }
     
@@ -136,64 +138,64 @@ public class AppController {
         if (progress == 0) {
             imageUrl = "graphics/Treasure0.png";
         } 
-        else if (progress > 0 && progress <= 5) {
+        else if (progress > 0 && progress <= 2) {
             imageUrl = "graphics/Treasure1.png";
         }
-        else if (progress > 5 && progress <= 10) {
+        else if (progress > 2 && progress <= 5) {
             imageUrl = "graphics/Treasure2.png";
         }
-        else if (progress > 10 && progress <= 15) {
+        else if (progress > 5 && progress <= 10) {
             imageUrl = "graphics/Treasure3.png";
         }
-        else if (progress > 15 && progress <= 20) {
+        else if (progress > 10 && progress <= 14) {
             imageUrl = "graphics/Treasure4.png";
         }
-        else if (progress > 20 && progress <= 25) {
+        else if (progress > 14 && progress <= 17) {
             imageUrl = "graphics/Treasure5.png";
         }
-        else if (progress > 25 && progress <= 30) {
+        else if (progress > 17 && progress <= 20) {
             imageUrl = "graphics/Treasure6.png";
         }
-        else if (progress > 30 && progress <= 35) {
+        else if (progress > 20 && progress <= 23) {
             imageUrl = "graphics/Treasure7.png";
         }
-        else if (progress > 35 && progress <= 40) {
+        else if (progress > 23 && progress <= 25) {
             imageUrl = "graphics/Treasure8.png";
         }
-        else if (progress > 40 && progress <= 45) {
+        else if (progress > 25 && progress <= 30) {
             imageUrl = "graphics/Treasure9.png";
         }
-        else if (progress > 45 && progress <= 50) {
+        else if (progress > 30 && progress <= 35) {
             imageUrl = "graphics/Treasure10.png";
         }
-        else if (progress > 50 && progress <= 55) {
+        else if (progress > 35 && progress <= 40) {
             imageUrl = "graphics/Treasure11.png";
         }
-        else if (progress > 55 && progress <= 60) {
+        else if (progress > 40 && progress <= 45) {
             imageUrl = "graphics/Treasure12.png";
         }
-        else if (progress > 60 && progress <= 65) {
+        else if (progress > 45 && progress <= 51) {
             imageUrl = "graphics/Treasure13.png";
         }
-        else if (progress > 65 && progress <= 70) {
+        else if (progress > 51 && progress <= 58) {
             imageUrl = "graphics/Treasure14.png";
         }
-        else if (progress > 70 && progress <= 75) {
+        else if (progress > 58 && progress <= 63) {
             imageUrl = "graphics/Treasure15.png";
         }
-        else if (progress > 75 && progress <= 80) {
+        else if (progress > 63 && progress <= 70) {
             imageUrl = "graphics/Treasure16.png";
         }
-        else if (progress > 80 && progress <= 85) {
+        else if (progress > 70 && progress <= 80) {
             imageUrl = "graphics/Treasure17.png";
         }
-        else if (progress > 85 && progress <= 90) {
+        else if (progress > 80 && progress <= 90) {
             imageUrl = "graphics/Treasure18.png";
         }
-        else if (progress > 90 && progress <= 99) {
+        else if (progress > 90 && progress < 100) {
             imageUrl = "graphics/Treasure19.png";
         }
-        else if (progress > 99) {
+        else if (progress >= 100) {
             imageUrl = "graphics/Treasure20.png";
         } 
         return imageUrl;
@@ -209,21 +211,6 @@ public class AppController {
     @FXML
     private void unfocus() {
         anchorPane.requestFocus();
-    }
-    
-    private void playClickSound() {
-        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
-        click.play();
-    }
-    
-    private void playDepositSound() {
-        AudioClip deposit = new AudioClip(this.getClass().getResource("sounds/deposit.wav").toString());
-        deposit.play();
-    }
-    
-    private void playWithdrawalSound() {
-        AudioClip withdrawal = new AudioClip(this.getClass().getResource("sounds/withdrawal.wav").toString());
-        withdrawal.play();
     }
     
 }

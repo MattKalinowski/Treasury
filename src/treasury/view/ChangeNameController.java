@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import treasury.Main;
+import treasury.util.Utility;
 
 public class ChangeNameController {
 
@@ -48,7 +49,7 @@ public class ChangeNameController {
         String name;
         int id = main.getDatabase().selectUserId(main.getName());
         if (validateName()) {
-        playClickSound();
+        Utility.playClickSound();
         main.setName(textField.getText());
         name = main.getName();
         main.getDatabase().updateUserName(name, id);
@@ -59,7 +60,7 @@ public class ChangeNameController {
     
     @FXML
     private void handleCancel() {
-        playClickSound();
+        Utility.playClickSound();
         changeNameStage.close();
     }
     
@@ -79,11 +80,6 @@ public class ChangeNameController {
         } else {
             return true;
         }
-    }
-    
-    private void playClickSound() {
-        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
-        click.play();
     }
     
 }

@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import treasury.Main;
+import treasury.util.Utility;
 
 public class SetInitialGoalController {
     
@@ -70,7 +71,7 @@ public class SetInitialGoalController {
     @FXML
     private void handleOkButton() {
         if(!textField.getText().isEmpty()) {
-        playClickSound();
+        Utility.playClickSound();
         int id = main.getDatabase().selectUserId(main.getName());
         main.getDatabase().updateNewUserStatus(false, id);
         main.setGoal(Integer.valueOf(textField.getText()));
@@ -82,11 +83,6 @@ public class SetInitialGoalController {
     @FXML
     private void unfocus() {
         anchorPane.requestFocus();
-    }
-    
-    private void playClickSound() {
-        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
-        click.play();
     }
     
 }

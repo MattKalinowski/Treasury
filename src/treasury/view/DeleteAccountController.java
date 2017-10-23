@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import treasury.Main;
+import treasury.util.Utility;
 
 public class DeleteAccountController {
     
@@ -20,7 +21,7 @@ public class DeleteAccountController {
     
     @FXML
     public void handleYes() {
-        playClickSound();
+        Utility.playClickSound();
         String name = main.getName();
         int userId = main.getDatabase().selectUserId(name);
         main.getDatabase().deleteUser(userId);
@@ -31,13 +32,8 @@ public class DeleteAccountController {
     
     @FXML
     public void handleNo() {
-        playClickSound();
+        Utility.playClickSound();
         deleteAccountStage.close();
-    }
-    
-    private void playClickSound() {
-        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
-        click.play();
     }
     
 }

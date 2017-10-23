@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import treasury.Main;
+import treasury.util.Utility;
 
 public class LogInController {
 
@@ -52,13 +53,13 @@ public class LogInController {
     
     @FXML
     private void handleLogIn() {
-        playClickSound();
+        Utility.playClickSound();
         validate();
     }
     
     @FXML
     private void handleSignUp() {
-        playClickSound();
+        Utility.playClickSound();
         main.showSignUp();
     }
     
@@ -69,7 +70,7 @@ public class LogInController {
     
     @FXML
     private void handleLanguageSwitch() {
-        playClickSound();
+        Utility.playClickSound();
         if (main.getLocale().getLanguage().equals("pl")) {
             main.setLocale(new Locale("en"));
             main.getDatabase().updateLanguage("en");
@@ -134,11 +135,6 @@ public class LogInController {
     @FXML
     private void unfocus() {
         anchorPane.requestFocus();
-    }
-    
-    private void playClickSound() {
-        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
-        click.play();
     }
     
 }

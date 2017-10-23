@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import treasury.Main;
+import treasury.util.Utility;
 
 public class SetGoalController {
 
@@ -73,7 +74,7 @@ public class SetGoalController {
     @FXML
     private void handleAccept() {
         if(!textField.getText().isEmpty()) {
-        playClickSound();
+        Utility.playClickSound();
         int newGoal = Integer.valueOf(textField.getText());
         if (newGoal > main.getMoney() && textField.getLength() < 7) {
             main.setGoal(newGoal);
@@ -88,18 +89,13 @@ public class SetGoalController {
     
     @FXML
     private void handleCancel() {
-        playClickSound();
+        Utility.playClickSound();
         setGoalStage.close();
     }
     
     @FXML
     private void unfocus() {
         anchorPane.requestFocus();
-    }
-    
-    private void playClickSound() {
-        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
-        click.play();
     }
     
 }

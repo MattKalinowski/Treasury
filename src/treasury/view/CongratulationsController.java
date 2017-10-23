@@ -3,6 +3,7 @@ package treasury.view;
 import javafx.fxml.FXML;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+import treasury.util.Utility;
 
 public class CongratulationsController {
 
@@ -14,13 +15,8 @@ public class CongratulationsController {
 
     @FXML
     private void handleOk() {
-        playClickSound();
+        Utility.playClickSound();
         congratulationStage.close();
-    }
-    
-    private void playClickSound() {
-        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
-        click.play();
     }
     
 }

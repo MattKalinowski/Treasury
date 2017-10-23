@@ -9,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import treasury.Main;
+import treasury.util.Utility;
 
 public class SignUpController {
 
@@ -63,13 +64,13 @@ public class SignUpController {
     
     @FXML
     private void handleLogIn() {
-        playClickSound();
+        Utility.playClickSound();
         main.showLogIn();
     }
     
     @FXML
     private void handleSignUp() {
-        playClickSound();
+        Utility.playClickSound();
         if (validateTextFields()) {
             createAnAccount();
             main.showLogIn();
@@ -157,9 +158,4 @@ public class SignUpController {
         anchorPane.requestFocus();
     }
     
-    private void playClickSound() {
-        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
-        click.play();
-    }
-
 }

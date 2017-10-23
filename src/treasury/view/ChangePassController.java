@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import treasury.Main;
+import treasury.util.Utility;
 
 public class ChangePassController {
 
@@ -50,12 +51,12 @@ public class ChangePassController {
     @FXML
     private void handleAccept() {
         passwordChange();
-        playClickSound();
+        Utility.playClickSound();
     }
     
     @FXML
     private void handleCancel() {
-        playClickSound();
+        Utility.playClickSound();
         changePassStage.close();
     }
     
@@ -90,11 +91,6 @@ public class ChangePassController {
     @FXML
     private void unfocus() {
         anchorPane.requestFocus();
-    }
-    
-    private void playClickSound() {
-        AudioClip click = new AudioClip(this.getClass().getResource("sounds/click.wav").toString());
-        click.play();
     }
     
 }
