@@ -1,6 +1,6 @@
-# Project Title
+# Treasury
 
-One Paragraph of project description goes here
+Treasury is a finance managing application.
 
 ## Getting Started
 
