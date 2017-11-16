@@ -5,7 +5,7 @@ Treasury is a simple app for managing your personal savings. It's my first "real
 
 ### Prerequisites
 
-To build this project, you need to instal NetBeans IDE
+To build this project, you need to install NetBeans IDE
 
 
 ## How it works
