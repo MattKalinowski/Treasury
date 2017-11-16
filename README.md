@@ -1,7 +1,7 @@
 
 # Treasury
 
-Treasury is a simple app for managing your personal savings.
+Treasury is a simple app for managing your personal savings. It's my first "real" app with GUI. 
 
 ### Prerequisites
 
