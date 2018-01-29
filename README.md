@@ -1,7 +1,7 @@
 
 # Treasury
 
-Treasury is a simple app for managing your personal savings. It's my first "real" app with GUI. 
+Treasury is a simple app for managing your personal savings. This is one of my first applications ever created in Java language and my first "real" app with GUI. During this project my programming skills were very low.
 
 ### Prerequisites
 
